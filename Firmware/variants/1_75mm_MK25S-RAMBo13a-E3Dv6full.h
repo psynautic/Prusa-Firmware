@@ -15,7 +15,7 @@
 #define DEVELOPER
 
 // Printer name
-#define CUSTOM_MENDEL_NAME "Prusa i3 MK2.5S"
+#define CUSTOM_MENDEL_NAME "HARIBO.3030 mk25s"
 
 // Electronics
 #define MOTHERBOARD BOARD_RAMBO_MINI_1_3
@@ -61,7 +61,7 @@
 #define X_MIN_POS 0
 #define Y_MAX_POS 210
 #define Y_MIN_POS -4
-#define Z_MAX_POS 210
+#define Z_MAX_POS 225
 #define Z_MIN_POS 0.15
 
 // Canceled home position

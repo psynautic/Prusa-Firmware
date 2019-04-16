@@ -11,7 +11,7 @@
 #define FW_COMMIT_NR   2201
 // FW_VERSION_UNKNOWN means this is an unofficial build.
 // The firmware should only be checked into github with this symbol.
-#define FW_DEV_VERSION FW_VERSION_UNKNOWN
+#define FW_DEV_VERSION FW_VERSION_GOLD
 #define FW_REPOSITORY "Unknown"
 #define FW_VERSION_FULL FW_VERSION "-" STR(FW_COMMIT_NR)
 
@@ -456,7 +456,7 @@ your extruder heater takes 2 minutes to hit the target on heating.
 //#define SDSLOW // Use slower SD transfer mode (not normally needed - uncomment if you're getting volume init error)
 #define SD_CHECK_AND_RETRY // Use CRC checks and retries on the SD communication
 #define ENCODER_PULSES_PER_STEP 4 // Increase if you have a high resolution encoder
-//#define ENCODER_STEPS_PER_MENU_ITEM 1 // Set according to ENCODER_PULSES_PER_STEP or your liking
+#define ENCODER_STEPS_PER_MENU_ITEM 1 // Set according to ENCODER_PULSES_PER_STEP or your liking
 
 // The RepRapDiscount Smart Controller (white PCB)
 // http://reprap.org/wiki/RepRapDiscount_Smart_Controller
