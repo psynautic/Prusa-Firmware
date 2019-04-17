@@ -31,7 +31,8 @@ deploy:
   api_key: $ACCESS_TOKEN
   file_glob: true
   file:
-    - ./Prusa-Firmware-build/*
+    - ./lang/*.hex
+    - ./lang/*.zip
   skip_cleanup: true
   on:
     tags: true
