@@ -1,6 +1,6 @@
 dist: trusty
 before_install:
-  - sudo apt-get install -y ninja-build
+  - sudo apt-get install -y ninja-build zip
 script:
   - bash -x test.sh
   - cp Firmware/variants/1_75mm_MK3S-EINSy10a-E3Dv6full.h Firmware/Configuration_prusa.h
@@ -11,15 +11,19 @@ script:
   - rm Firmware/Configuration_prusa.h
   - cp Firmware/variants/1_75mm_MK25S-RAMBo13a-E3Dv6full.h Firmware/Configuration_prusa.h
   - bash -x build.sh || { echo "1_75mm_MK25S-RAMBo13a-E3Dv6full variant failed" && false; }
+  - zip ./*.hex MK25S-RAMBo13a.zip
   - rm Firmware/Configuration_prusa.h
   - cp Firmware/variants/1_75mm_MK25S-RAMBo10a-E3Dv6full.h Firmware/Configuration_prusa.h
   - bash -x build.sh || { echo "1_75mm_MK25S-RAMBo10a-E3Dv6full variant failed" && false; }
+  - zip ./*.hex MK25S-RAMBo10a.zip
   - rm Firmware/Configuration_prusa.h
   - cp Firmware/variants/1_75mm_MK25-RAMBo13a-E3Dv6full.h Firmware/Configuration_prusa.h
   - bash -x build.sh || { echo "1_75mm_MK25-RAMBo13a-E3Dv6full variant failed" && false; }
+  - zip ./*.hex MK25-RAMBo13a.zip
   - rm Firmware/Configuration_prusa.h
   - cp Firmware/variants/1_75mm_MK25-RAMBo10a-E3Dv6full.h Firmware/Configuration_prusa.h
   - bash -x build.sh || { echo "1_75mm_MK25-RAMBo10a-E3Dv6full variant failed" && false; }
+  - zip ./*.hex MK25-RAMBo10a.zip
   - rm Firmware/Configuration_prusa.h
   - cp Firmware/variants/1_75mm_MK2-RAMBo13a-E3Dv6full.h Firmware/Configuration_prusa.h
   - bash -x build.sh || { echo "1_75mm_MK2-RAMBo13a-E3Dv6full variant failed" && false; }
@@ -31,7 +35,6 @@ deploy:
   api_key: $ACCESS_TOKEN
   file_glob: true
   file:
-    - ./lang/*.hex
     - ./lang/*.zip
   skip_cleanup: true
   on:
