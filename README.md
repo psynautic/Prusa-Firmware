@@ -53,6 +53,9 @@ _(after installation, the item is labeled as `"INSTALLED"` and can then be used 
 add "-Wl,-u,vfprintf -lprintf_flt -lm" to "compiler.c.elf.flags=" before existing flag "-Wl,--gc-sections"  
 example:  
 `"compiler.c.elf.flags=-w -Os -Wl,-u,vfprintf -lprintf_flt -lm -Wl,--gc-sections"`
+The file can be found in Arduino instalation directory, or after Arduino has been updated at:  
+"C:\Users\(user)\AppData\Local\Arduino15\packages\arduino\hardware\avr\(version)"
+If you can locate the file in both places, file from user profile is probably used.
 
 #### 2. Source code compilation
 
@@ -107,6 +110,9 @@ Now your Ubuntu subsystem is ready to use the automatic `PF-build.sh` script and
   - Example: You files are under `C:\Users\<your-username>\Downloads\Prusa-Firmware-MK3`
   - use under Ubuntu the following command `cd /mnt/c/Users/<your-username>/Downloads/Prusa-Firmware-MK3`
     to change to the right folder
+- Unix and windows have different line endings (LF vs CRLF), try dos2unix to convert
+  - This should fix the `"$'\r': command not found"` error
+  - to install run `apt-get install dos2unix`
 
 #### Compile Prusa-firmware with Ubuntu Linux subsystem installed
 - open Ubuntu bash
