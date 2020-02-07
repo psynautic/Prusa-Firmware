@@ -2,12 +2,16 @@
 #define CONFIGURATION_PRUSA_H
 
 #include <limits.h>
+#include "printers.h"
 /*------------------------------------
  GENERAL SETTINGS
  *------------------------------------*/
 
 // Printer revision
 #define PRINTER_TYPE PRINTER_MK3S
+#define PRINTER_NAME PRINTER_MK3S_NAME
+#define PRINTER_MMU_TYPE PRINTER_MK3S_MMU2
+#define PRINTER_MMU_NAME PRINTER_MK3S_MMU2_NAME
 #define FILAMENT_SIZE "1_75mm_MK3"
 #define NOZZLE_TYPE "E3Dv6full"
 
@@ -21,6 +25,9 @@
 #define MOTHERBOARD BOARD_EINSY_1_0a
 #define STEEL_SHEET
 #define HAS_SECOND_SERIAL_PORT
+
+// PSU
+#define PSU_Delta                                 // uncomment if DeltaElectronics PSU installed
 
 
 // Uncomment the below for the E3D PT100 temperature sensor (with or without PT100 Amplifier)
@@ -131,6 +138,7 @@
 // Safety timer
 #define SAFETYTIMER
 #define DEFAULT_SAFETYTIMER_TIME_MINS 30
+#define FARM_DEFAULT_SAFETYTIMER_TIME_ms (45*60*1000ul)
 
 // Filament sensor
 #define FILAMENT_SENSOR
@@ -254,11 +262,13 @@
 #define TMC2130_SG_THRS_Y       3     // stallguard sensitivity for Y axis
 #define TMC2130_SG_THRS_Z       4     // stallguard sensitivity for Z axis
 #define TMC2130_SG_THRS_E       3     // stallguard sensitivity for E axis
+#define TMC2130_SG_THRS_HOME {3, 3, TMC2130_SG_THRS_Z, TMC2130_SG_THRS_E}
 
 //new settings is possible for vsense = 1, running current value > 31 set vsense to zero and shift both currents by 1 bit right (Z axis only)
 #define TMC2130_CURRENTS_H {16, 20, 35, 30}  // default holding currents for all axes
 #define TMC2130_CURRENTS_R {16, 20, 35, 30}  // default running currents for all axes
-#define TMC2130_UNLOAD_CURRENT_R 12			 // lowe current for M600 to protect filament sensor 
+#define TMC2130_CURRENTS_R_HOME {8, 10, 20, 18}  // homing running currents for all axes
+// #define TMC2130_UNLOAD_CURRENT_R 12			 // lower current for M600 to protect filament sensor - Unused
 
 #define TMC2130_STEALTH_Z
 
@@ -416,7 +426,7 @@
 #define BED_ADJUSTMENT_UM_MAX 100
 
 #define MESH_HOME_Z_CALIB 0.2
-#define MESH_HOME_Z_SEARCH 5 //Z lift for homing, mesh bed leveling etc.
+#define MESH_HOME_Z_SEARCH 5.0f           // Z lift for homing, mesh bed leveling etc.
 
 #define X_PROBE_OFFSET_FROM_EXTRUDER 23     // Z probe to nozzle X offset: -left  +right
 #define Y_PROBE_OFFSET_FROM_EXTRUDER 5     // Z probe to nozzle Y offset: -front +behind
@@ -480,32 +490,28 @@
  *------------------------------------*/
 
 #define FARM_PREHEAT_HOTEND_TEMP 250
-#define FARM_PREHEAT_HPB_TEMP 60
-#define FARM_PREHEAT_FAN_SPEED 0
+#define FARM_PREHEAT_HPB_TEMP 80
 
 #define PLA_PREHEAT_HOTEND_TEMP 215
 #define PLA_PREHEAT_HPB_TEMP 60
-#define PLA_PREHEAT_FAN_SPEED 0
+
+#define ASA_PREHEAT_HOTEND_TEMP 260
+#define ASA_PREHEAT_HPB_TEMP 105
 
 #define ABS_PREHEAT_HOTEND_TEMP 255
 #define ABS_PREHEAT_HPB_TEMP 100
-#define ABS_PREHEAT_FAN_SPEED 0
 
 #define HIPS_PREHEAT_HOTEND_TEMP 220
 #define HIPS_PREHEAT_HPB_TEMP 100
-#define HIPS_PREHEAT_FAN_SPEED 0
 
 #define PP_PREHEAT_HOTEND_TEMP 254
 #define PP_PREHEAT_HPB_TEMP 100
-#define PP_PREHEAT_FAN_SPEED 0
 
 #define PET_PREHEAT_HOTEND_TEMP 230
 #define PET_PREHEAT_HPB_TEMP 85
-#define PET_PREHEAT_FAN_SPEED 0
 
 #define FLEX_PREHEAT_HOTEND_TEMP 240
 #define FLEX_PREHEAT_HPB_TEMP 50
-#define FLEX_PREHEAT_FAN_SPEED 0
 
 /*------------------------------------
  THERMISTORS SETTINGS
@@ -626,7 +632,7 @@
 #define MMU_REQUIRED_FW_BUILDNR 83
 #define MMU_HWRESET
 #define MMU_DEBUG //print communication between MMU2 and printer on serial
-//#define MMU_HAS_CUTTER
+#define MMU_HAS_CUTTER
 
 // This is experimental feature requested by our test department.
 // There is no known use for ordinary user. If enabled by this macro
