@@ -1,6 +1,6 @@
 dist: trusty
 before_install:
-  - sudo apt-get install -y ninja-build zip
+  - sudo apt-get install -y ninja-build zip gawk
   # Arduino IDE adds a lot of noise caused by network traffic, trying to firewall it off
   - sudo iptables -P INPUT DROP
   - sudo iptables -P FORWARD DROP
